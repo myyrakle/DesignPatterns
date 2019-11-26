@@ -6,32 +6,6 @@ class Person
   private String job = "unknown";
   private String address = "unknown";
   
-  public Person(String name)
-  {
-    this.name = name;
-  }
-  
-  public Person setAge(int age)
-  {
-    this.age = age;
-    return this;
-  }
-  public Person setSex(String sex)
-  {
-    this.sex = sex;
-    return this;
-  }
-  public Person setJob(String job)
-  {
-    this.job = job;
-    return this;
-  }
-  public Person setAddress(String address)
-  {
-    this.address = address;
-    return this;
-  }
-  
   public void print()
   {
     System.out.println("이름: "+name);
@@ -40,17 +14,55 @@ class Person
     System.out.println("성별: "+sex);
     System.out.println("직업: "+job);
   }
+  
+  static class Builder
+  {
+    private Person obj;
+    
+    public Builder(String name)
+    {
+      obj = new Person();
+      obj.name = name;
+    }
+    
+    public Person getPerson()
+    {
+      return obj;
+    }
+    
+    public Builder setAge(int age)
+    {
+      obj.age = age;
+      return this;
+    }
+    public Builder setSex(String sex)
+    {
+      obj.sex = sex;
+      return this;
+    }
+    public Builder setJob(String job)
+    {
+      obj.job = job;
+      return this;
+    }
+    public Builder setAddress(String address)
+    {
+      obj.address = address;
+      return this;
+    }
+  }
 }
 
 public class UseBuilder
 {
   public static void main(String args[])
   { 
-    Person p = new Person("john")
-                .setAge(33)
-                .setSex("남")
-                .setJob("백수")
-                .setAddress("그린란드 한가운데");
+    Person p = new Person.Builder("john")
+                 .setAge(33)
+                 .setSex("남")
+                 .setAddress("그린란드 한가운데")
+                 .setJob("백수")
+                 .getPerson();
                 
     p.print();
   }
